@@ -2,7 +2,7 @@
 
 import rclpy
 from rclpy.node import Node
-from booster_interface.msg import RemoteControllerState
+from booster_control.msg import RemoteControllerState
 from std_msgs.msg import String
 import sys
 import termios
