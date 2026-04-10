@@ -20,14 +20,7 @@ find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(fastcdr REQUIRED)
 find_package(fastrtps REQUIRED)
-find_package(rosidl_default_generators REQUIRED)
-
-rosidl_generate_interfaces(${PROJECT_NAME}
-  "msg/BinaryData.msg"
-  "msg/RemoteControllerState.msg"
-  "msg/RpcReqMsg.msg"
-  "msg/RpcRespMsg.msg"
-)
+find_package(booster_msgs REQUIRED)
 
 # Find non-ROS dependencies
 find_library(BOOSTER_SDK_LIB Names booster_robotics_sdk PATHS /usr/local/lib REQUIRED)
@@ -42,14 +35,12 @@ endif()
 
 
 add_executable(booster_controller src/booster_controller.cpp)
-ament_target_dependencies(booster_controller rclcpp std_msgs fastrtps fastcdr)
-rosidl_get_typesupport_target(cpp_typesupport_target ${PROJECT_NAME} "rosidl_typesupport_cpp")
+ament_target_dependencies(booster_controller rclcpp std_msgs fastrtps fastcdr booster_msgs)
 
 target_link_libraries(booster_controller
   ${BOOSTER_SDK_LIB}
   fastrtps
   fastcdr
-  "${cpp_typesupport_target}"
 )
 
 install(TARGETS booster_controller

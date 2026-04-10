@@ -1,7 +1,7 @@
 #include <rclcpp/rclcpp.hpp>
 #include <std_msgs/msg/string.hpp>
-#include <booster_control/msg/rpc_req_msg.hpp>
-#include <booster_control/msg/rpc_resp_msg.hpp>
+#include <booster_msgs/msg/rpc_req_msg.hpp>
+#include <booster_msgs/msg/rpc_resp_msg.hpp>
 #include <nlohmann/json.hpp>
 
 #include <iostream>
@@ -24,11 +24,11 @@ public:
         subscription_ = this->create_subscription<std_msgs::msg::String>(
             "/booster/action", 10, std::bind(&BoosterControllerRaw::action_callback, this, std::placeholders::_1));
 
-        resp_subscription_ = this->create_subscription<booster_control::msg::RpcRespMsg>(
+        resp_subscription_ = this->create_subscription<booster_msgs::msg::RpcRespMsg>(
             "LocoApiTopicResp", 10, std::bind(&BoosterControllerRaw::resp_callback, this, std::placeholders::_1));
 
         // Publisher
-        publisher_ = this->create_publisher<booster_control::msg::RpcReqMsg>("LocoApiTopicReq", 10);
+        publisher_ = this->create_publisher<booster_msgs::msg::RpcReqMsg>("LocoApiTopicReq", 10);
 
         init_mappings();
     }
@@ -227,7 +227,7 @@ private:
         hand_end_effector_active_ = true;
     }
 
-    void resp_callback(const booster_control::msg::RpcRespMsg::SharedPtr msg)
+    void resp_callback(const booster_msgs::msg::RpcRespMsg::SharedPtr msg)
     {
         RCLCPP_INFO(this->get_logger(), "ROBOT RESP << UUID: %s | Header: %s | Body: %s", 
             msg->uuid.c_str(), msg->header.c_str(), msg->body.c_str());
@@ -235,7 +235,7 @@ private:
 
     void send_api_req(int api_id, json body_json)
     {
-        auto message = booster_control::msg::RpcReqMsg();
+        auto message = booster_msgs::msg::RpcReqMsg();
         
         message.uuid = "cmd_" + std::to_string(std::rand());
         
@@ -249,8 +249,8 @@ private:
     }
 
     rclcpp::Subscription<std_msgs::msg::String>::SharedPtr subscription_;
-    rclcpp::Publisher<booster_control::msg::RpcReqMsg>::SharedPtr publisher_;
-    rclcpp::Subscription<booster_control::msg::RpcRespMsg>::SharedPtr resp_subscription_;
+    rclcpp::Publisher<booster_msgs::msg::RpcReqMsg>::SharedPtr publisher_;
+    rclcpp::Subscription<booster_msgs::msg::RpcRespMsg>::SharedPtr resp_subscription_;
     
     // State Tracking
     bool hand_end_effector_active_;
