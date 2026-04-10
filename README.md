@@ -8,7 +8,7 @@ Este repositório contém o pacote `booster_control`, projetado para controlar r
 O nó principal que traduz comandos de ação para requisições de API (`RpcReqMsg`) que o robô entende.
 
 - **Tópico de Entrada:** `/booster/action` (`std_msgs/msg/String`)
-- **Tópico de Saída:** `LocoApiTopicReq` (`booster_control/msg/RpcReqMsg`)
+- **Tópico de Saída:** `LocoApiTopicReq` (`booster_msgs/msg/RpcReqMsg`)
 - **Comandos Suportados:**
     - `kPrepare`, `kWalking`, `kSoccer`, `kLieDown`, `kGetUp`, `kShoot`, `kEnableRobocupWalkMode`, entre outros.
 
