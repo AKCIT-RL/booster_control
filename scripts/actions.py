@@ -71,10 +71,17 @@ class ActionSender(Node):
             'i': 'kSquatLeft',
             'j': 'kSquatRight',
             'k': 'kSquatUp',
-            'l': 'kSquatDown',
-            'p': 'kMoveToTargetInternal',
+            'o': 'kSquatDown',
+            'p': 'kMoveToTargetTest',
             't': 'kMoveToTargetWithKickTest',
-            'E': 'kEnableRobocupWalkMode'
+            'E': 'kEnableRobocupWalkMode',
+            'K': 'kHighKick',
+            'A': 'kHandActionTest',
+            'I': 'kStanceActionIdle',
+            'C': 'kChangeControlModeTest',
+            'D': 'kSetHandActionParamsTest',
+            'Z': 'kStandUp',
+            'N': 'kEnableVisualKickMode'
 
         }
         self.print_menu()

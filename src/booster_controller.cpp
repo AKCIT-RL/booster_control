@@ -204,6 +204,41 @@ private:
             RCLCPP_INFO(this->get_logger(), "Enabling Robocup Walk Mode (100008)");
             send_api_req(100008, json::object());
         };
+
+        command_map_["kHighKick"] = [this]() {
+            RCLCPP_INFO(this->get_logger(), "Executing High Kick (100001)");
+            send_api_req(100001, {{"kick_speed", 1.0}, {"kick_dir", 0.0}});
+        };
+
+        command_map_["kHandActionTest"] = [this]() {
+            RCLCPP_INFO(this->get_logger(), "Executing Hand Action Test (100002)");
+            send_api_req(100002, {{"hand_action_index", 0}});
+        };
+
+        command_map_["kStanceActionIdle"] = [this]() {
+            RCLCPP_INFO(this->get_logger(), "Executing Stance Action Idle (100004)");
+            send_api_req(100004, {{"stance_action_index", -1}});
+        };
+
+        command_map_["kChangeControlModeTest"] = [this]() {
+            RCLCPP_INFO(this->get_logger(), "Executing Change Control Mode Test (100005)");
+            send_api_req(100005, {{"control_mode", 3}});
+        };
+
+        command_map_["kSetHandActionParamsTest"] = [this]() {
+            RCLCPP_INFO(this->get_logger(), "Executing Set Hand Action Params Test (100006)");
+            send_api_req(100006, {{"hand_action_index", 0}, {"reset_default", true}, {"hand_action_params", std::vector<double>{}}});
+        };
+
+        command_map_["kStandUp"] = [this]() {
+            RCLCPP_INFO(this->get_logger(), "Executing Stand Up (100007)");
+            send_api_req(100007, json::object());
+        };
+
+        command_map_["kEnableVisualKickMode"] = [this]() {
+            RCLCPP_INFO(this->get_logger(), "Enabling Visual Kick Mode (100010)");
+            send_api_req(100010, json::object());
+        };
     }
 
     void action_callback(const std_msgs::msg::String::SharedPtr msg)
